@@ -12,6 +12,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,16 +22,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Service
 public class CommitService {
 
 
     @Autowired
     RestTemplate restTemplate;
 
-    @Value("${githubminer.token}")
+    @Value("${gitbucketminer.token}")
     private String token;
 
-    @Value("${githubminer.baseuri}")
+    @Value("${gitbucketminer.baseuri}")
     private String baseUri;
 
     @Value("${gitminer.sincecommits}")
