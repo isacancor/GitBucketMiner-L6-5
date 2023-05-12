@@ -1,9 +1,7 @@
 package aiss.gitbucketminer.service;
 
 import aiss.gitbucketminer.exception.ProjectNotFoundException;
-import aiss.gitbucketminer.gitbucketmodel.Commit2;
 import aiss.gitbucketminer.gitbucketmodel.Project2;
-import aiss.gitbucketminer.model.Commit;
 import aiss.gitbucketminer.model.Project;
 import aiss.gitbucketminer.utils.ParsingModels;
 import org.slf4j.Logger;
@@ -17,19 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-
 @Service
 public class ProjectService {
 
     @Autowired
     RestTemplate restTemplate;
-
-    @Autowired
-    CommitService commitService;
 
     @Value("${gitbucketminer.baseuri}")
     private String baseUri;
@@ -73,16 +63,6 @@ public class ProjectService {
 
         Project2 oldProject = projectRE.getBody();
         Project project = ParsingModels.parseProject(oldProject);
-
-        List<Commit2> commits = Arrays.stream(commitService.getCommits(uri+  "/commits", headers).getBody()).toList();
-
-        List<Commit> newCommits = new ArrayList<>();
-        for(Commit2 c: commits){
-            Commit newCommit = ParsingModels.parseCommit(c);
-            newCommits.add(newCommit);
-        }
-
-        project.setCommits(newCommits);
 
         return project;
     }
