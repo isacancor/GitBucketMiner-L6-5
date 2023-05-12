@@ -70,6 +70,8 @@ public class GitBucketController {
         String uri = "http://localhost:8080/gitminer/projects";
         Project res = projectService.getProject(owner, repo);
 
+        System.out.println(res);
+
         ResponseEntity<Project> response = restTemplate
                 .postForEntity(uri, res, Project.class);
 
