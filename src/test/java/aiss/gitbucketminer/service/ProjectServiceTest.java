@@ -11,9 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ProjectServiceTest {
-    @Autowired
-    CommitService commitService;
-
     @Value("${gitbucketminer.token}")
     private String token;
 
