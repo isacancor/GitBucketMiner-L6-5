@@ -25,6 +25,7 @@ public class GitBucketController {
     @Autowired
     RestTemplate restTemplate;
 
+    // GET /gitbucketminer/{owner}/{repoName}
     @Operation(
             summary = "Retrieve a GitBucket Project",
             description = "Get a GitBucket Project by specifying some parameters",
@@ -45,7 +46,7 @@ public class GitBucketController {
         return res;
     }
 
-    // POST /githubminer/{owner}/{repoName}[?sinceCommits=5&sinceIssues=30&maxPages=2]
+    // POST /gitbucketminer/{owner}/{repoName}
     @Operation(
             summary = "Send a GitBucket Project to GitMiner",
             description = "Get a GitBucket Project to GitMiner by specifying some parameters",
