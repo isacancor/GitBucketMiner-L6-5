@@ -17,15 +17,6 @@ class ProjectServiceTest {
     @Value("${gitbucketminer.baseuri}")
     private String baseUri;
 
-    @Value("${gitminer.sincecommits}")
-    private int sinceCommitsDefault;
-
-    @Value("${gitminer.sinceissues}")
-    private int sinceIssuesDefault;
-
-    @Value("${gitminer.maxpages}")
-    private int maxPagesDefault;
-
     final String owner = "root";
     final String repo = "sample";
 
@@ -44,6 +35,11 @@ class ProjectServiceTest {
 
     @Test
     void getProjectThatDoesntExist() throws ProjectNotFoundException {
-        Project project = projectService.getProject(repo, repo);
+        try {
+            Project project2 = projectService.getProject(owner, owner);
+        } catch (Exception e) {
+            assertTrue(e.getClass().equals(ProjectNotFoundException.class), "ProjectNotFoundException not thrown");
+        }
+
     }
 }
