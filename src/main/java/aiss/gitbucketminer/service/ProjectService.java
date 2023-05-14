@@ -27,21 +27,8 @@ public class ProjectService {
     @Value("${gitbucketminer.token}")
     private String token;
 
-    @Value("${gitminer.sincecommits}")
-    private int sinceCommitsDefault;
-
-    @Value("${gitminer.sinceissues}")
-    private int sinceIssuesDefault;
-
-    @Value("${gitminer.maxpages}")
-    private int maxPagesDefault;
-
-    private static Logger logger = LoggerFactory
-            .getLogger(ProjectService.class);
-
     public Project getProject(String owner, String repo) throws ProjectNotFoundException {
         HttpHeaders headers = new HttpHeaders();
-
         // Setting token header
         if (token != "") {
             headers.set("Authorization", "token " + token);
@@ -59,7 +46,6 @@ public class ProjectService {
         } catch (Exception e) {
             throw new ProjectNotFoundException();
         }
-
 
         Project2 oldProject = projectRE.getBody();
         Project project = ParsingModels.parseProject(oldProject);
